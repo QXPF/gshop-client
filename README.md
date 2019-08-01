@@ -27,3 +27,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 2. 包括商家、商品、购物车、用户等多个子模块
 3. 使用Vue全家桶+Es6+Webpack等前端最新最热的技术
 4. 采用模块化、组件化、工程化的模式开发
+
+### 1.2、项目插件使用
++ VueAwesomeSwiper轮播图

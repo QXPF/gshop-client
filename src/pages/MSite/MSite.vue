@@ -1,141 +1,55 @@
 <template>
   <section class="msite">
     <!--首页头部-->
-    <header class="header">
-      <span class="header_search">
+    <header-top title="昌平区北七家宏福科技园(337省道北)">
+      <span class="header_search"
+            slot="left">
         <i class="iconfont icon-sousuo"></i>
       </span>
-      <span class="header_title">
-        <span class="header_title_text ellipsis">昌平区北七家宏福科技园(337省道北)</span>
-      </span>
-      <span class="header_login">
+
+      <span class="header_login"
+            slot="right">
         <span class="header_login_text">登录|注册</span>
       </span>
-    </header>
+    </header-top>
+    <!-- 轮播图 -->
+    <div class="swiper">
+      <swiper :options="swiperOption">
+        <!-- slides -->
+        <swiper-slide v-for="(item,index) in swiperList"
+                      :key="index">
+          <img class="swiper-img"
+               :src="item.imgUrl">
+        </swiper-slide>
+        <!-- Optional controls 分页 -->
+        <div class="swiper-pagination"
+             slot="pagination"></div>
+        <!-- 滚动条 -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+        <!-- 下一页 上一页  -->
+        <!-- <div class="swiper-button-next"></div>  -->
+
+        <!-- <div class="swiper-button-prev"></div> -->
+      </swiper>
+    </div>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/3.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/4.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/5.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/6.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/7.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/8.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
+      <swiper :options="swiperOptionNavs">
+        <swiper-slide v-for="(page,index) in pages"
+                      :key="index">
+          <div class="nav_item"
+               v-for="item in page"
+               :key="item.id">
+            <div class="nav_item_icon">
+              <img :src="item.navIcon">
+            </div>
+            <h3 class="nav_item_title"><span>{{item.navTitle}}</span></h3>
           </div>
-          <div class="swiper-slide">
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/9.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/10.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/11.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/12.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/13.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/14.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:"
-               class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-      </div>
+        </swiper-slide>
+        <!-- Optional controls 分页 -->
+        <div class="swiper-pagination"
+             slot="pagination"></div>
+      </swiper>
     </nav>
     <!--首页附近商家-->
     <div class="msite_shop_list">
@@ -331,90 +245,196 @@
   </section>
 </template>
 <script>
+import HeaderTop from '../../components/HeaderTop/HearderTop'
 export default {
-  name: 'msite'
+  name: 'msite',
+  data () {
+    return {
+      swiperOption: {
+        // some swiper options/callbacks
+        // 所有的参数同 swiper 官方 api 参数
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        loop: true,
+        autoplay: {
+          delay: 3000, //自动切换的时间间隔，单位ms
+          stopOnLastSlide: false, //当切换到最后一个slide时停止自动切换
+          stopOnLastSlide: false, //如果设置为true，当切换到最后一个slide时停止自动切换。
+          disableOnInteraction: true, //用户操作swiper之后，是否禁止autoplay。
+          reverseDirection: false, //开启反向自动轮播。
+          waitForTransition: false, //等待过渡完毕。自动切换会在slide过渡完毕后才开始计时。
+        },
+      },
+      swiperList: [
+        {
+          "id": "0001",
+          "imgUrl": "http://img1.qunarzz.com/piao/fusion/1801/1a/94428c6dea109402.jpg_640x200_2cf590d8.jpg"
+        },
+        {
+          "id": "0002",
+          "imgUrl": "http://img1.qunarzz.com/piao/fusion/1802/42/7c92b9a381e46402.jpg_640x200_1cdce2a4.jpg"
+        },
+        {
+          "id": "0003",
+          "imgUrl": "http://img1.qunarzz.com/piao/fusion/1802/51/e78f936a5b404102.jpg_640x200_c14f0b3a.jpg"
+        },
+        {
+          "id": "0004",
+          "imgUrl": "http://img1.qunarzz.com/piao/fusion/1712/91/a275569091681d02.jpg_640x200_0519ccb9.jpg"
+        }
+      ],
+      swiperOptionNavs: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
+      },
+      navList: [
+        {
+          id: '0001',
+          navIcon: 'images/nav/1.jpg',
+          navTitle: '甜品饮品',
+        },
+        {
+          id: '0002',
+          navIcon: 'images/nav/2.jpg',
+          navTitle: '商超遍历',
+        },
+        {
+          id: '0003',
+          navIcon: 'images/nav/3.jpg',
+          navTitle: '美食',
+        },
+        {
+          id: '0004',
+          navIcon: 'images/nav/4.jpg',
+          navTitle: '简餐',
+        },
+        {
+          id: '0005',
+          navIcon: 'images/nav/5.jpg',
+          navTitle: '新店特惠',
+        },
+        {
+          id: '0006',
+          navIcon: 'images/nav/6.jpg',
+          navTitle: '准时达',
+        },
+        {
+          id: '0007',
+          navIcon: 'images/nav/7.jpg',
+          navTitle: '预订早餐',
+        },
+        {
+          id: '0008',
+          navIcon: 'images/nav/8.jpg',
+          navTitle: '土豪推荐',
+        },
+        {
+          id: '0001',
+          navIcon: 'images/nav/1.jpg',
+          navTitle: '甜品饮品',
+        },
+        {
+          id: '0002',
+          navIcon: 'images/nav/2.jpg',
+          navTitle: '商超遍历',
+        },
+        {
+          id: '0003',
+          navIcon: 'images/nav/3.jpg',
+          navTitle: '美食',
+        },
+        {
+          id: '0004',
+          navIcon: 'images/nav/4.jpg',
+          navTitle: '简餐',
+        },
+        {
+          id: '0005',
+          navIcon: 'images/nav/5.jpg',
+          navTitle: '新店特惠',
+        },
+        {
+          id: '0006',
+          navIcon: 'images/nav/6.jpg',
+          navTitle: '准时达',
+        },
+      ]
+    }
+  },
+  computed: {
+    pages () {
+      const pages = [];
+      this.navList.forEach((item, index) => {
+        const page = Math.floor(index / 8);
+        if (!pages[page]) {
+          pages[page] = []
+        }
+        pages[page].push(item);
+      })
+      return pages;
+    }
+  },
+  components: {
+    HeaderTop
+  }
 }
 </script>
-<style lang="stylus" scoped>
+
+<style lang="stylus" scoped>// 当前组件scoped
 @import '../../common/stylus/mixins.styl'
+.swiper >>> .swiper-pagination-bullet-active // 样式穿透
+  background #fff !important
 .msite // 首页
   width 100%
-  .header
-    background-color #02a774
-    position fixed
-    z-index 100
-    left 0
-    top 0
+  .swiper
     width 100%
-    height 45px
-    .header_search
-      position absolute
-      left 15px
-      top 50%
-      transform translateY(-50%)
-      width 10%
-      height 50%
-      .icon-sousuo
-        font-size 25px
-        color #fff
-    .header_title
-      position absolute
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-      width 50%
-      color #fff
-      text-align center
-      .header_title_text
-        font-size 20px
-        color #fff
-        display block
-    .header_login
-      font-size 14px
-      color #fff
-      position absolute
-      right 15px
-      top 50%
-      transform translateY(-50%)
-      .header_login_text
-        color #fff
-  .msite_nav
-    bottom-border-1px(#e4e4e4)
+    height 0
+    padding-bottom 31.25%
     margin-top 45px
-    height 200px
-    background #fff
-    .swiper-container
+    background #eee
+    overflow hidden
+    .swiper-img
+      display block
       width 100%
-      height 100%
-      .swiper-wrapper
+  .msite_nav
+    width 100%
+    bottom-border-1px(#e4e4e4)
+    height 0
+    padding-bottom 50%
+    background #eee
+    touch-action none
+    overflow hidden
+    .nav_item
+      position relative
+      float left
+      width 25%
+      height 0
+      padding-bottom 25%
+      background #fff
+      overflow hidden
+      .nav_item_icon
+        position absolute
+        border 1px solid red
+        padding 0 5px
+        left 0
+        right 0
+        top 0
+        bottom 0
+        overflow hidden
+        img
+          display block
+          margin 0 auto
+          width 100%
+      .nav_item_title
+        position absolute
+        left 0
+        bottom 0
         width 100%
-        height 100%
-        .swiper-slide
-          display flex
-          justify-content center
-          align-items flex-start
-          flex-wrap wrap
-          .link_to_food
-            width 25%
-            .food_container
-              display block
-              width 100%
-              text-align center
-              padding-bottom 10px
-              font-size 0
-              img
-                display inline-block
-                width 50px
-                height 50px
-            span
-              display block
-              width 100%
-              text-align center
-              font-size 13px
-              color #666
-      .swiper-pagination
-        >span.swiper-pagination-bullet-active
-          background #02a774
+        font-size 12px
+        text-align center
+        line-height 25px
   .msite_shop_list
     top-border-1px(#e4e4e4)
     margin-top 10px
