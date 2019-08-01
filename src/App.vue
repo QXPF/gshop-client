@@ -2,16 +2,26 @@
   <div id="app">
 
     <router-view />
-    <footer-guide />
+    <footer-guide v-if="$route.meta.showFooter" />
   </div>
 </template>
 
 <script>
 import FooterGuide from './components/FooterGuide/FooterGuide'
+import { reqFoodCategorys } from './api'
 export default {
   name: 'App',
   components: {
     FooterGuide
+  },
+  methods: {
+    async food () {
+      const result = await reqFoodCategorys();
+      console.log(result)
+    }
+  },
+  mounted () {
+    this.food();
   }
 }
 </script>
@@ -19,8 +29,6 @@ export default {
 <style lang="stylus" scoped>
 #app
   width 100%
-  height 100%
-  background #f5f5f5
   position relative
 </style>
 

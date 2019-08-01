@@ -26,11 +26,16 @@ export default {
 @import '../../common/stylus/mixins.styl'
 .search // 搜索
   width 100%
+<<<<<<< HEAD
+=======
+  overflow hidden
+>>>>>>> 封装ajax
   .search_form
     clearFix()
     margin-top 45px
     background-color #fff
     padding 12px 8px
+    border 1px solid red
     input
       height 35px
       padding 0 4px
