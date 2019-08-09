@@ -31,7 +31,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ### 1.2、项目插件使用
 <<<<<<< HEAD
 + VueAwesomeSwiper轮播图
-=======
-+ VueAwesomeSwiper轮播图
++ 提取组件
++ 封住ajax
++ 使用vuex管理数据
  
->>>>>>> 封装ajax
+

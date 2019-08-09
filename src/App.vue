@@ -9,6 +9,7 @@
 <script>
 import FooterGuide from './components/FooterGuide/FooterGuide'
 import { reqFoodCategorys } from './api'
+import { mapMutations, mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -18,10 +19,14 @@ export default {
     async food () {
       const result = await reqFoodCategorys();
       console.log(result)
-    }
+    },
+    ...mapMutations({
+      RECEIVE_ADDRESS: 'RECEIVE_ADDRESS'
+    })
   },
   mounted () {
     this.food();
+    this.$store.dispatch('getShops')
   }
 }
 </script>
