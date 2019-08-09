@@ -113,10 +113,7 @@ export default {
 @import '../../common/stylus/mixins.styl'
 .profile // 我的
   width 100%
-<<<<<<< HEAD
-=======
   overflow hidden
->>>>>>> 封装ajax
   .profile-number
     margin-top 46px
     .profile-link
