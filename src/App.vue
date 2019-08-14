@@ -22,11 +22,15 @@ export default {
     },
     ...mapMutations({
       RECEIVE_ADDRESS: 'RECEIVE_ADDRESS'
-    })
+    }),
+    ...mapActions(['getAddress', 'getFoodCategorys', 'getShops'])
   },
   mounted () {
     this.food();
-    this.$store.dispatch('getShops')
+    // this.$store.dispatch('getAddress');
+    this.getAddress();
+    this.getFoodCategorys();
+    this.getShops();
   }
 }
 </script>

@@ -29,10 +29,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 4. 采用模块化、组件化、工程化的模式开发
 
 ### 1.2、项目插件使用
-<<<<<<< HEAD
+
 + VueAwesomeSwiper轮播图
 + 提取组件
 + 封住ajax
 + 使用vuex管理数据
++ 对接数据接口
  
 

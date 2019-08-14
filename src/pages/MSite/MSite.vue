@@ -1,7 +1,7 @@
 <template>
   <section class="msite">
     <!--首页头部-->
-    <header-top title="昌平区北七家宏福科技园(337省道北)">
+    <header-top :title="address.name">
       <span class="header_search"
             slot="left">
         <i class="iconfont icon-sousuo"></i>
@@ -42,15 +42,15 @@
                v-for="item in page"
                :key="item.id">
             <div class="nav_item_icon">
-              <img :src="item.navIcon">
+              <img :src=" baseImageUrl+item.image_url">
             </div>
-            <h3 class="nav_item_title"><span>{{item.navTitle}}</span></h3>
+            <h3 class="nav_item_title"><span>{{item.title}}</span></h3>
           </div>
         </swiper-slide>
         <!-- Optional controls 分页 -->
         <div class="swiper-pagination"
-             slot="pagination"
-             v-if="pages.length>1"></div>
+             v-if='pages.length!=1'
+             slot="pagination"></div>
       </swiper>
     </nav>
     <!--首页附近商家-->
@@ -66,8 +66,13 @@
 <script>
 import HeaderTop from '../../components/HeaderTop/HearderTop'
 import ShopList from '../../components/ShopList/ShopList'
+import { mapState } from 'vuex'
 export default {
   name: 'msite',
+  components: {
+    HeaderTop,
+    ShopList
+  },
   data () {
     return {
       swiperOption: {
@@ -104,89 +109,19 @@ export default {
           "imgUrl": "http://img1.qunarzz.com/piao/fusion/1712/91/a275569091681d02.jpg_640x200_0519ccb9.jpg"
         }
       ],
+      baseImageUrl: 'https://fuss10.elemecdn.com',
       swiperOptionNavs: {
         pagination: {
           el: '.swiper-pagination'
-        },
+        }
+
       },
-      navList: [
-        {
-          id: '0001',
-          navIcon: require('./images/nav/1.jpg'),
-          navTitle: '甜品饮品',
-        },
-        {
-          id: '0002',
-          navIcon: require('./images/nav/2.jpg'),
-          navTitle: '商超遍历',
-        },
-        {
-          id: '0003',
-          navIcon: require('./images/nav/3.jpg'),
-          navTitle: '美食',
-        },
-        {
-          id: '0004',
-          navIcon: require('./images/nav/4.jpg'),
-          navTitle: '简餐',
-        },
-        {
-          id: '0005',
-          navIcon: require('./images/nav/5.jpg'),
-          navTitle: '新店特惠',
-        },
-        {
-          id: '0006',
-          navIcon: require('./images/nav/6.jpg'),
-          navTitle: '准时达',
-        },
-        {
-          id: '0007',
-          navIcon: require('./images/nav/7.jpg'),
-          navTitle: '预订早餐',
-        },
-        {
-          id: '0008',
-          navIcon: require('./images/nav/8.jpg'),
-          navTitle: '土豪推荐',
-        },
-        {
-          id: '0001',
-          navIcon: require('./images/nav/1.jpg'),
-          navTitle: '甜品饮品',
-        },
-        {
-          id: '0002',
-          navIcon: require('./images/nav/2.jpg'),
-          navTitle: '商超遍历',
-        },
-        {
-          id: '0003',
-          navIcon: require('./images/nav/3.jpg'),
-          navTitle: '美食',
-        },
-        {
-          id: '0004',
-          navIcon: require('./images/nav/4.jpg'),
-          navTitle: '简餐',
-        },
-        {
-          id: '0005',
-          navIcon: require('./images/nav/5.jpg'),
-          navTitle: '新店特惠',
-        },
-        {
-          id: '0006',
-          navIcon: require('./images/nav/6.jpg'),
-          navTitle: '准时达',
-        },
-      ]
     }
   },
   computed: {
     pages () {
       const pages = [];
-      this.navList.forEach((item, index) => {
+      this.categorys.forEach((item, index) => {
         const page = Math.floor(index / 8);
         if (!pages[page]) {
           pages[page] = []
@@ -194,14 +129,17 @@ export default {
         pages[page].push(item);
       })
       return pages;
-    }
+    },
+    ...mapState(['address', 'categorys']),
+
   },
-  components: {
-    HeaderTop,
-    ShopList
+  created () {
+
   },
   mounted () {
-
+    // this.$store.dispatch('getFoodCategorys');
+    // if (this.pages.length > 1) {
+    // }
   }
 }
 </script>
@@ -247,7 +185,7 @@ export default {
       overflow hidden
       .nav_item_icon
         position absolute
-        padding 0 5px
+        padding 0 15px
         left 0
         right 0
         top 0
